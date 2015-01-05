@@ -74,7 +74,7 @@ ch.mainChart = function(dom_elem, nodes) {
 					.charge(-3000)
 					.gravity(0.1)
 					.linkDistance(function() {
-						if($(window).width() < 640) return 100;
+						if($(window).width() < 640) return 175;
 						else return 250;
 					})
 					.size([this.w, this.h])
