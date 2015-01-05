@@ -7,8 +7,8 @@ ch.mainChart = function(dom_elem, nodes) {
 	this.nodes = nodes;
 	this.links = []
 	this.dom_elem = dom_elem;
-	this.w = $(window).width() - 100;
-	this.h = $(window).height() - 100;
+	this.w = $(window).width();
+	this.h = $(window).height();
 
 	for(var i in this.nodes) {
 		if(!this.nodes[i].root) {
