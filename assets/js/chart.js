@@ -7,7 +7,7 @@ ch.mainChart = function(dom_elem, nodes) {
 	this.nodes = nodes;
 	this.links = []
 	this.dom_elem = dom_elem;
-	this.w = $(window).width();
+	this.w = $(window).width() - 10;
 	this.h = $(window).height();
 
 	for(var i in this.nodes) {
@@ -36,14 +36,36 @@ ch.mainChart = function(dom_elem, nodes) {
 						.data(this.nodes)
 						.enter().append('g')
 							.attr('id', function(d) {
-								if(d.root) return 'root';
+								if(d.root) {
+									d.x = this.w/2;
+									d.y = this.h/8;
+									d.fixed = true;
+									return 'root';
+								}
 								else return 'node';
-							})
+							}.bind(this))
+						.on('click', function(d) {
+							if (d3.event.defaultPrevented) return; // ignore drag
+
+							switch(d.text) {
+								case "Projects":
+									scrollToElement("#projects");
+									break;
+								case "About":
+									scrollToElement("#about");
+									break;
+								case "Contact":
+									scrollToElement("#contact");
+									break;
+								default:
+									scrollToElement("#index");
+							}
+						})
 
 	this.node
 		.append('image')
 			.attr('xlink:href', function(d) {
-				return d.image
+				if (!d.root) return d.image
 			})
 			.attr({
 				'width' : function(d) {return d.r * 2.2},
@@ -52,16 +74,31 @@ ch.mainChart = function(dom_elem, nodes) {
 				"y" : function(d) {return -d.r * 1.1}
 			})
 
-	this.node
+	var textLayer = this.node
 		.append('text')
 			.text(function(d) {
+				if(d.root) return
 				return d.text
 			})
-			.attr('opacity', '0')
+			.attr('opacity', function(d) {
+				if (!d.root) return 0;
+			})
+
+	textLayer.append('tspan')
+			.text(function(d) {if(d.root) return 'Blade Chapman'})
+			.attr('dy', '1.4em')
+			.attr('x', '0')
+			.attr('fill', "#595AB7")
+	textLayer.append('tspan')
+			.text(function(d) {if(d.root) return 'Developer & Student'})
+			.attr('dy', '1.4em')
+			.attr('x', '0')
+
 
 	this.node
 		.append('circle')
 			.attr('r', function(d) {
+				if(d.root) return 0;
 				return d.r;
 			})
 			.attr('stroke', '#708284')
@@ -71,11 +108,11 @@ ch.mainChart = function(dom_elem, nodes) {
 
 	// force metrics need to scale to window size
 	this.force = d3.layout.force()
-					.charge(-3000)
+					.charge(-5000)
 					.gravity(0.1)
 					.linkDistance(function() {
 						if($(window).width() < 640) return 175;
-						else return 250;
+						else return 400;
 					})
 					.size([this.w, this.h])
 					.on("tick", this.tick.bind(this))
@@ -84,8 +121,6 @@ ch.mainChart = function(dom_elem, nodes) {
 }
 
 ch.mainChart.prototype.start = function() {
-	console.log(this)
-
 	this.force
 			.nodes(this.nodes)
 			.links(this.links)
@@ -93,14 +128,9 @@ ch.mainChart.prototype.start = function() {
 }
 
 ch.mainChart.prototype.tick = function() {
-
-	// this.node
-	// 	.attr("cx", function(d) { return d.x = Math.max(d.r/2, Math.min(this.w - d.r/2, d.x)); })
-	// 	.attr("cy", function(d) { return d.y = Math.max(d.r/2, Math.min(this.h - d.r/2, d.y)); });
-
 	this.node
 		.attr('transform', function(d, i) {
-			// console.log(this.w)
+
 			d.x = Math.max(d.r, Math.min(this.w - d.r, d.x));
 			d.y = Math.max(d.r, Math.min(this.h - d.r, d.y));
 

@@ -17,8 +17,31 @@ image {
 	clip-path : url(#clip);
 }
 
+tspan {
+}
+
 #index {
 	background: #FDF6E3;
+}
+
+#about, #projects, #contact {
+	height: 500px;
+}
+
+#about {
+	background: #042029;
+}
+
+#projects {
+	background: #475B62;
+}
+
+#contact {
+	background: #0A2933;
+}
+
+#root {
+	font-size: 2em;
 }
 
 #node image, text{
