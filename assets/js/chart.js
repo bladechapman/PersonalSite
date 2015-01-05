@@ -73,7 +73,10 @@ ch.mainChart = function(dom_elem, nodes) {
 	this.force = d3.layout.force()
 					.charge(-3000)
 					.gravity(0.1)
-					.linkDistance(250)
+					.linkDistance(function() {
+						if($(window).width() < 640) return 100;
+						else return 250;
+					})
 					.size([this.w, this.h])
 					.on("tick", this.tick.bind(this))
 
