@@ -1,0 +1,41 @@
+
+html, body {
+    padding:0;
+    margin:0;
+}
+
+body {
+	font-family: "Exo 2", "Helvetica Neue", Helvetica, sans-serif;
+	font-weight: 300;
+	font-size: 1.2em;
+	line-height: 1.2em;
+	/*background: #FDF6E3;*/
+	color: #475B62;
+}
+
+image {
+	clip-path : url(#clip);
+}
+
+#index {
+	background: #FDF6E3;
+}
+
+#node image, text{
+	text-anchor: middle;
+	font-size: 1.3em;
+	alignment-baseline: middle;
+
+	-webkit-transition: opacity .1s ease-in-out;
+    -moz-transition: opacity .1s ease-in-out;
+    -o-transition: opacity .1s ease-in-out;
+    transition: opacity .1s ease-in-out;
+}
+
+#node:hover text {
+	opacity: 100;
+}
+
+#node:hover image {
+	opacity: 0;
+}
