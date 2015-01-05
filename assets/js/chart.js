@@ -90,8 +90,17 @@ ch.mainChart.prototype.start = function() {
 }
 
 ch.mainChart.prototype.tick = function() {
+
+	// this.node
+	// 	.attr("cx", function(d) { return d.x = Math.max(d.r/2, Math.min(this.w - d.r/2, d.x)); })
+	// 	.attr("cy", function(d) { return d.y = Math.max(d.r/2, Math.min(this.h - d.r/2, d.y)); });
+
 	this.node
 		.attr('transform', function(d, i) {
+			// console.log(this.w)
+			d.x = Math.max(d.r, Math.min(this.w - d.r, d.x));
+			d.y = Math.max(d.r, Math.min(this.h - d.r, d.y));
+
 			return 'translate(' + d.x + ', ' + d.y + ')';
-		})
+		}.bind(this))
 }
