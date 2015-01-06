@@ -1,14 +1,13 @@
 var ch = ch || {};
 
-ch.test = 'test'
-
 ch.mainChart = function(dom_elem, nodes) {
 
 	this.nodes = nodes;
 	this.links = []
 	this.dom_elem = dom_elem;
-	this.w = $(window).width() - 10;
-	this.h = $(window).height();
+	this.w = $(window).width();
+	this.h = $(window).height() - 10;
+
 
 	for(var i in this.nodes) {
 		if(!this.nodes[i].root) {
@@ -24,13 +23,8 @@ ch.mainChart = function(dom_elem, nodes) {
 						.attr({
 							'width' : this.w,
 							'height' : this.h,
-							'class' : 'chart'
+							'class' : 'chart',
 						});
-
-	this.svg.append('defs').append('clipPath')
-				.attr('id', 'clip')
-			.append('circle')
-				.attr('r', 80)
 
 	this.node = this.svg.selectAll('g')
 						.data(this.nodes)
@@ -88,11 +82,12 @@ ch.mainChart = function(dom_elem, nodes) {
 			.text(function(d) {if(d.root) return 'Blade Chapman'})
 			.attr('dy', '1.4em')
 			.attr('x', '0')
-			.attr('fill', "#595AB7")
+			.attr('fill', "#BD3613")
 	textLayer.append('tspan')
 			.text(function(d) {if(d.root) return 'Developer & Student'})
 			.attr('dy', '1.4em')
 			.attr('x', '0')
+			.attr('fill', '#0A2933')
 
 
 	this.node
@@ -101,7 +96,7 @@ ch.mainChart = function(dom_elem, nodes) {
 				if(d.root) return 0;
 				return d.r;
 			})
-			.attr('stroke', '#708284')
+			.attr('stroke', '#000000')
 			.attr('stroke-width', '2px')
 			.attr('fill', 'none')
 
@@ -111,7 +106,7 @@ ch.mainChart = function(dom_elem, nodes) {
 					.charge(-5000)
 					.gravity(0.1)
 					.linkDistance(function() {
-						if($(window).width() < 640) return 175;
+						if($(window).width() < 640) return 500;
 						else return 400;
 					})
 					.size([this.w, this.h])
