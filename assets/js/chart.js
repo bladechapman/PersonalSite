@@ -18,13 +18,16 @@ ch.mainChart = function(dom_elem, nodes) {
 		}
 	}
 
-	this.svg = d3.select(this.dom_elem)
+	this.canvas = d3.select(this.dom_elem)
 					.append('svg')
 						.attr({
 							'width' : this.w,
 							'height' : this.h,
 							'class' : 'chart',
-						});
+						})
+
+	this.svg = this.canvas.append('g')
+						.attr('id', 'graphic')
 
 	this.node = this.svg.selectAll('g')
 						.data(this.nodes)
@@ -55,7 +58,6 @@ ch.mainChart = function(dom_elem, nodes) {
 									scrollToElement("#index");
 							}
 						})
-
 	this.node
 		.append('image')
 			.attr('xlink:href', function(d) {
@@ -67,7 +69,6 @@ ch.mainChart = function(dom_elem, nodes) {
 				"x" : function(d) {return -d.r * 1.1},
 				"y" : function(d) {return -d.r * 1.1}
 			})
-
 	var textLayer = this.node
 		.append('text')
 			.text(function(d) {
@@ -77,7 +78,6 @@ ch.mainChart = function(dom_elem, nodes) {
 			.attr('opacity', function(d) {
 				if (!d.root) return 0;
 			})
-
 	textLayer.append('tspan')
 			.text(function(d) {if(d.root) return 'Blade Chapman'})
 			.attr('dy', '1.4em')
@@ -88,8 +88,6 @@ ch.mainChart = function(dom_elem, nodes) {
 			.attr('dy', '1.4em')
 			.attr('x', '0')
 			.attr('fill', '#0A2933')
-
-
 	this.node
 		.append('circle')
 			.attr('r', function(d) {
@@ -106,9 +104,10 @@ ch.mainChart = function(dom_elem, nodes) {
 					.charge(-5000)
 					.gravity(0.1)
 					.linkDistance(function() {
-						if($(window).width() < 640) return 500;
+						if(this.canvas.attr('width') < 640) return 500;
 						else return 400;
-					})
+						return 400;
+					}.bind(this))
 					.size([this.w, this.h])
 					.on("tick", this.tick.bind(this))
 
@@ -121,7 +120,6 @@ ch.mainChart.prototype.start = function() {
 			.links(this.links)
 			.start()
 }
-
 ch.mainChart.prototype.tick = function() {
 	this.node
 		.attr('transform', function(d, i) {
@@ -131,4 +129,11 @@ ch.mainChart.prototype.tick = function() {
 
 			return 'translate(' + d.x + ', ' + d.y + ')';
 		}.bind(this))
+}
+ch.mainChart.prototype.translateToCenter = function(dx) {
+	// this.w = $(window).width()
+	this.canvas.attr('width', $(window).width())
+	this.svg.attr('transform', 'translate(' + dx + ', ' + 0 + ')');
+
+	this.force.start()
 }
