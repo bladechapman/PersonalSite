@@ -1,0 +1,326 @@
+/* Apply to all elements*/
+*
+{
+    font-family: 'Dosis', sans-serif;
+}
+/*gradient bg*/
+/*NOTE: gradient only extends to bottom-most div*/
+body
+{
+    background-attachment:fixed !important;
+    /* IE10 Consumer Preview */
+    /*background: url(http://www.menucool.com/slider/prod/image-slider-4.jpg);*/
+    background-repeat: no-repeat;
+    /*background-color: #B5B5B5;*/
+
+    background-image: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, #B5B5B5 100%);
+    /*, url(http://www.menucool.com/slider/prod/image-slider-4.jpg);*/
+
+    /* Mozilla Firefox */
+    background-image: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, #B5B5B5 100%);
+    /*, url(http://www.menucool.com/slider/prod/image-slider-4.jpg);*/
+
+    /* Opera */
+    background-image: -o-linear-gradient(top, rgba(255,255,255,0) 0%, #B5B5B5 100%);
+    /*, url(http://www.menucool.com/slider/prod/image-slider-4.jpg);*/
+
+    /* Webkit (Safari/Chrome 10) */
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #B5B5B5));
+    /*, url(http://www.menucool.com/slider/prod/image-slider-4.jpg);*/
+
+    /* Webkit (Chrome 11+) */
+    background-image: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, #B5B5B5 100%);
+    /*, url(http://www.menucool.com/slider/prod/image-slider-4.jpg);*/*/
+
+    /* W3C Markup, IE10 Release Preview */
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #B5B5B5 100%);
+    /*, url(http://www.menucool.com/slider/prod/image-slider-4.jpg);*/
+
+}
+a{
+    text-decoration: none;
+    border-bottom: 0px;
+    color: white;
+}
+html{
+    /*overflow-y:hidden;*/
+    /*overflow-x:hidden;*/
+}
+
+/*sidebar*/
+#sidebar
+{
+    position:fixed;
+    top:250px;
+    left:-10px;
+    height: auto;
+    width:130px;
+    /*background-color:gray;*/
+    border-radius: 10px;
+    border: 2px solid black;
+}
+/*end sidebar*/
+
+.padding
+{
+    padding-top: 8px;
+    padding-bottom:8px;
+}
+.smallpadding
+{
+    padding-top: 5px;
+}
+
+/*header*/
+.headerSubText
+{
+    text-decoration: none;
+    border-bottom: 0px;
+    color: black;
+}
+.headerCircle
+{
+    width: 150px;
+    height: 150px;
+    background:black;
+    border-radius: 50%;
+
+    /*NOTE: Standard line thickness is 3px*/
+    border: 3px solid black;
+    box-shadow: 0 0 8px rgba(0,0,0,0.8);
+
+    position: relative ;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+.headerPic
+{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+
+    position: absolute;
+
+}
+.headerText
+{
+    text-align:center;
+    font-size: 30px;
+
+    /*border: 1px solid red;*/
+}
+.headerSubText
+{
+    text-align:center;
+    /*border: 1px solid red;*/
+
+}
+
+/*buttons*/
+.buttonPadding
+{
+    padding-top: 12px;
+    padding-bottom: 12px;
+
+    position: relative;
+    left:-50%;
+
+    /*centers buttons within buttons div*/
+    /*margin-left:auto;
+    margin-right:auto;*/
+
+    width: 100px;
+    height:100px;
+
+    /*border: 1px solid blue;*/
+}
+.buttonBorder
+{
+    width: 100px;
+    height: 100px;
+
+    border-radius: 50%;
+    border:2px solid black;
+}
+
+/*crossfade*/
+#cf {
+    position:relative;
+    margin:0 auto;
+}
+#cf img {
+    height:100px;
+    width:100px;
+    position:absolute;
+    left:0;
+    -webkit-transition: opacity .1s ease-in-out;
+    -moz-transition: opacity .1s ease-in-out;
+    -o-transition: opacity .1s ease-in-out;
+    transition: opacity .1s ease-in-out;
+
+    border-radius: 50%;
+}
+#cf div
+{
+    width:100px;
+
+    text-align: center;
+    vertical-align: center;
+
+    font-size: 28px;
+
+    -webkit-transition: opacity .1s ease-in-out;
+    -moz-transition: opacity .1s ease-in-out;
+    -o-transition: opacity .1s ease-in-out;
+    transition: opacity .1s ease-in-out;
+}
+#cf div.bottom{
+    opacity:0;
+}
+#cf:hover div.bottom {
+    opacity:100;
+}
+#cf:hover img.top{
+    opacity:0;
+}
+
+/*text cells*/
+.tb
+{
+    outline: 2px solid #CCC;
+    border: 1px solid #999;
+    background-color: #999;
+}
+
+#paddedText
+{
+    padding : 10%;
+}
+
+.contactInner
+{
+    padding-top: 12px;
+    padding-bottom: 12px;
+
+    position:relative;
+    left: -50%;
+
+    /*note: specifying width is important*/
+    width: 100px;
+
+    /*margin-left: auto;
+    margin-right: auto;*/
+
+
+    /*border: 1px solid blue;*/
+}
+
+table.brief, td
+{
+    border-spacing:10px;
+    border-radius: 10px;
+    background-color:black;
+    border: 1px solid black;
+    width:100px;
+    color:white;
+    text-align:center;
+}
+table.para, td
+{
+    border-spacing:10px;
+    border-radius: 10px;
+    background-color:black;
+    width:300px;
+    border: 2px solid black;
+    color:white;
+    text-align:left;
+}
+table.long, td
+{
+    border-spacing:10px;
+    border-radius: 10px;
+    background-color:black;
+    width:300px;
+    border: 2px solid black;
+    color:white;
+    text-align: center
+}
+.projectsInnerT1
+{
+    padding-top: 12px;
+    padding-bottom: 12px;
+
+    width: 300px;
+
+    position: relative;
+    /*left: -50%;*/
+    /*border: 2px solid orange;*/
+}
+
+.aboutInnerT1
+{
+    padding-top: 12px;
+    padding-bottom: 12px;
+
+    width: 300px;
+
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    /*left: -50%;*/
+
+    /*border: 2px solid orange;*/
+}
+.aboutInnerT2
+{
+    padding-top: 12px;
+    padding-bottom: 12px;
+
+    width: 300px;
+
+    position: relative;
+    /*left: -50%;*/
+    /*border: 2px solid orange;*/
+}
+
+/*Containers*/
+.buttons
+{
+    position: absolute;
+    /*position:fixed;*/
+    left:50%;
+    /*border: 2px solid red;*/
+    width:100px;
+}
+.aboutContainer
+{
+    position:absolute;
+    left:150%;
+    /*border: 2px solid blue;*/
+    display: none;
+}
+.projectsContainer
+{
+    position:absolute;
+    left:150%;
+    /*border: 2px solid red;*/
+    display: none;
+}
+.contactContainer
+{
+    /*border: solid green 2px;*/
+
+    position:absolute;
+    width:100px;
+    left:150%;
+    right:auto;
+    display: none;
+}
+
+/*misc
+.placeHolder
+{
+    height:100px;
+    border: solid red 2px;
+}
