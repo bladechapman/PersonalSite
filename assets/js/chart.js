@@ -94,7 +94,7 @@ ch.mainChart = function(dom_elem, nodes) {
 				if(d.root) return 0;
 				return d.r;
 			})
-			.attr('stroke', '#000000')
+			.attr('stroke', '#0A2933')
 			.attr('stroke-width', '2px')
 			.attr('fill', 'none')
 
@@ -133,6 +133,7 @@ ch.mainChart.prototype.tick = function() {
 ch.mainChart.prototype.translateToCenter = function(dx) {
 	// this.w = $(window).width()
 	this.canvas.attr('width', $(window).width())
+	this.canvas.attr('height', $(window).height() - 10)
 	this.svg.attr('transform', 'translate(' + dx + ', ' + 0 + ')');
 
 	this.force.start()
