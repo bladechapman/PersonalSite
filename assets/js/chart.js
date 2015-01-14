@@ -124,8 +124,11 @@ ch.mainChart.prototype.tick = function() {
 	this.node
 		.attr('transform', function(d, i) {
 
-			d.x = Math.max(d.r, Math.min(this.w - d.r, d.x));
-			d.y = Math.max(d.r, Math.min(this.h - d.r, d.y));
+			var real_x = this.w * (1/this.sf)
+			var real_y = this.h * (1/this.sf)
+
+			d.x = Math.max(d.r - real_x, Math.min(real_x - d.r, d.x));
+			d.y = Math.max(d.r - real_y, Math.min(real_y - d.r, d.y));
 
 			return 'translate(' + d.x + ', ' + d.y + ')';
 		}.bind(this))
