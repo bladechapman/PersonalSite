@@ -146,7 +146,7 @@ ch.mainChart.prototype.translateToCenter = function(dx) {
 			var new_w = w * this.sf;
 			var difference = w - new_w;
 
-			return 'translate(' + (dx + difference/2) +  ', ' + 0 + ')' + ' scale(' + this.sf + ')';
+			return 'translate(' + (dx + difference/2) +  ', ' + this.canvas.attr('height')/6 + ')' + ' scale(' + this.sf + ')';
 		}
 		return 'translate(' + dx + ', ' + 0 + ')';
 	}.bind(this));
