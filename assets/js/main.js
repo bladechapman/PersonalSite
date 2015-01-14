@@ -32,6 +32,7 @@ flatten(nodes)
 
 var mainChart = new ch.mainChart("#index", nodes);
 mainChart.start();
+mainChart.translateToCenter.bind(mainChart)()
 
 var oldWidth = $(window).width();
 $(window).resize(function() {

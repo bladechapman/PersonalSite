@@ -104,8 +104,8 @@ ch.mainChart = function(dom_elem, nodes) {
 					.charge(-5000)
 					.gravity(0.1)
 					.linkDistance(function() {
-						if(this.canvas.attr('width') < 640) return 500;
-						else return 400;
+						// if(this.canvas.attr('width') < 640) return 500;
+						// else return 400;
 						return 400;
 					}.bind(this))
 					.size([this.w, this.h])
@@ -124,17 +124,32 @@ ch.mainChart.prototype.tick = function() {
 	this.node
 		.attr('transform', function(d, i) {
 
-			d.x = Math.max(d.r, Math.min(this.w - d.r, d.x));
-			d.y = Math.max(d.r, Math.min(this.h - d.r, d.y));
+			// d.x = Math.max(d.r, Math.min(this.w - d.r, d.x));
+			// d.y = Math.max(d.r, Math.min(this.h - d.r, d.y));
 
 			return 'translate(' + d.x + ', ' + d.y + ')';
 		}.bind(this))
 }
 ch.mainChart.prototype.translateToCenter = function(dx) {
 	// this.w = $(window).width()
+	if(!dx) {
+		dx = 0;
+		this.sf = ($(window).width() < 750) ? ($(window).width() / 750) : 1;
+	}
+
 	this.canvas.attr('width', $(window).width())
 	this.canvas.attr('height', $(window).height() - 10)
-	this.svg.attr('transform', 'translate(' + dx + ', ' + 0 + ')');
+	this.svg.attr('transform', function() {
+		var limit = 750;
+		if (this.canvas.attr('width') < limit) {
+			var w = this.canvas.attr('width');
+			var new_w = w * this.sf;
+			var difference = w - new_w;
+
+			return 'translate(' + (dx + difference/2) +  ', ' + 0 + ')' + ' scale(' + this.sf + ')';
+		}
+		return 'translate(' + dx + ', ' + 0 + ')';
+	}.bind(this));
 
 	this.force.start()
 }
