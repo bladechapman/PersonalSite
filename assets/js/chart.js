@@ -124,11 +124,12 @@ ch.mainChart.prototype.tick = function() {
 	this.node
 		.attr('transform', function(d, i) {
 
-			var real_x = this.w * (1/this.sf)
-			var real_y = this.h * (1/this.sf)
+			var real_x = $(window).width()
+			var real_y = $(window).height()
 
-			d.x = Math.max(d.r - real_x, Math.min(real_x - d.r, d.x));
-			d.y = Math.max(d.r - real_y, Math.min(real_y - d.r, d.y));
+
+			// d.x = Math.max(d.r - real_x, Math.min(d.r, d.x));
+			// d.y = Math.max(d.r - real_y, Math.min(d.r, d.y));
 
 			return 'translate(' + d.x + ', ' + d.y + ')';
 		}.bind(this))
